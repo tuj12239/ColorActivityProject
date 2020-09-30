@@ -26,16 +26,17 @@ public class ColorActivity extends AppCompatActivity
 
         final ConstraintLayout colorLayout = findViewById(R.id.colorLayout);
         final Spinner colorSpinner = findViewById(R.id.colorSpinner);
-        final ColorAdapter colorAdapter = new ColorAdapter();
 
         final String colors[] = {"Red", "Blue", "Green", "Yellow", "Magenta",
          "Purple", "Teal", "Aqua", "Maroon", "Olive"};
+        final ColorAdapter colorAdapter = new ColorAdapter(colors);
 
         colorSpinner.setAdapter(new ColorAdapter(colors));
         colorSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                colorLayout.setBackgroundColor(Color.parseColor(((TextView)view).toString()));
+                colorLayout.setBackgroundColor(Color.parseColor((String)((TextView)view).getText()));
+                view.setBackgroundColor(Color.WHITE);
             }
 
             @Override
