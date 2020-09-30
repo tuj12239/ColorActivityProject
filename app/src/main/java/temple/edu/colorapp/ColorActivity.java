@@ -4,12 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.solver.state.State;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Layout;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 public class ColorActivity extends AppCompatActivity
 {
@@ -21,6 +26,23 @@ public class ColorActivity extends AppCompatActivity
 
         final ConstraintLayout colorLayout = findViewById(R.id.colorLayout);
         final Spinner colorSpinner = findViewById(R.id.colorSpinner);
+        final ColorAdapter colorAdapter = new ColorAdapter();
+
+        final String colors[] = {"Red", "Blue", "Green", "Yellow", "Magenta",
+         "Purple", "Teal", "Aqua", "Maroon", "Olive"};
+
+        colorSpinner.setAdapter(new ColorAdapter(colors));
+        colorSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                colorLayout.setBackgroundColor(Color.parseColor(((TextView)view).toString()));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                colorLayout.setBackgroundColor(Color.GREEN);
+            }
+        });
     }
 }
 
